@@ -75,7 +75,7 @@ func main() {
 
 func checkout(repo, path string) error {
 	// Clone git repo if it doesn't exist.
-	if _, err := os.Stat(filepath.Join(path, ".git")); os.IsNotExist(err) {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
 		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
 			return err
 		}
