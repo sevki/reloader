@@ -79,7 +79,7 @@ func checkout(repo, path string) error {
 		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
 			return err
 		}
-		if err := runErr(logCmd("git", "clone", "--bare", repo, path)); err != nil {
+		if err := runErr(logCmd("git", "clone", "--mirror", repo, path)); err != nil {
 			return err
 		}
 	} else if err != nil {
@@ -88,7 +88,7 @@ func checkout(repo, path string) error {
 
 	// Pull down changes and update to hash.
 
-	cmd := logCmd("git", "fetch")
+	cmd := logCmd("git", "fetch", "--all")
 	cmd.Dir = path
 	return runErr(cmd)
 }
