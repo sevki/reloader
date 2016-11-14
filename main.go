@@ -68,11 +68,20 @@ func main() {
 	doe(err)
 	cgit := httputil.NewSingleHostReverseProxy(u)
 
-	http.Handle("/", cgit)
+	http.Handle("/", AddPrefix("cgit.cgi", cgit))
 	http.HandleFunc("/_status", status)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
-
+func AddPrefix(prefix string, h http.Handler) http.Handler {
+	if prefix == "" {
+		return h
+	}
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println(r.URL.Path, path.Join(prefix, r.URL.Path))
+		r.URL.Path = path.Join(prefix, r.URL.Path)
+		h.ServeHTTP(w, r)
+	})
+}
 func checkout(repo, path string) error {
 	// Clone git repo if it doesn't exist.
 	if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -87,7 +96,7 @@ func checkout(repo, path string) error {
 	}
 
 	// Pull down changes and update to hash.
-
+log.Print(path)
 	cmd := logCmd("git", "fetch", "--all")
 	cmd.Dir = path
 	return runErr(cmd)
