@@ -1,0 +1,13 @@
+css=/cgit.css
+logo=https://static.sevki.net/cgit_logo.png
+robots=noindex, nofollow
+enable-git-config=1
+section-from-path=2
+scan-path=/git
+enable-commit-graph=1
+enable-http-clone=1
+favicon=https://static.sevki.net/favicon.ico
+clone-url=https://git.sevki.io/cgit.cgi/$CGIT_REPO_URL
+snapshots=tar.gz tar.bz2 zip
+root-desc=git.sevki.io
+root-title=git mirrors
