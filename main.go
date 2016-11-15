@@ -78,7 +78,7 @@ func AddPrefix(prefix string, h http.Handler) http.Handler {
 		return h
 	}
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println(r.URL.Path )
+		log.Println(r.URL.Path)
 		r.URL.Path = path.Join(prefix, r.URL.Path)
 		h.ServeHTTP(w, r)
 	})

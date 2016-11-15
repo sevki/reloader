@@ -7,5 +7,4 @@ ADD cgitrc /etc/cgitrc
 ENV GOPATH /go
 RUN go get reloader
 
-
 CMD /go/bin/reloader
