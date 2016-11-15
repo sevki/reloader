@@ -1,4 +1,4 @@
-css=/cgit.css
+css=https://static.sevki.net/cgit.css
 logo=https://static.sevki.net/cgit_logo.png
 robots=noindex, nofollow
 enable-git-config=1
